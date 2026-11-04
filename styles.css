@@ -1,0 +1,14 @@
+html,body,[class*="css"],.stApp{font-family:Inter,Arial,sans-serif;background:#f4f6fa;color:#16243b}
+.block-container{max-width:1440px;padding-top:2.2rem;padding-bottom:4rem}
+[data-testid="stSidebar"]{display:none}
+h1{font-size:2.5rem!important;letter-spacing:-1.3px;color:#152841!important}
+h2{font-size:1.5rem!important;color:#152841!important;margin-top:1.2rem!important}
+h3{color:#152841!important}
+.hero{background:linear-gradient(120deg,#122c40,#165b57);border-radius:20px;padding:30px 34px;color:white;margin-bottom:24px}
+.hero h1{color:white!important;margin:7px 0!important}.hero p{color:#d3e8e3;margin:4px 0}
+.eyebrow{font-size:12px;letter-spacing:2px;color:#8de0c9;font-weight:700}
+[data-testid="stMetric"]{background:white;border:1px solid #e3e9f0;border-radius:14px;padding:16px}
+[data-testid="stMetricLabel"]{color:#617187}[data-testid="stMetricValue"]{color:#153d40}
+div.stButton>button[kind="primary"]{background:#147d69;border:0;color:white;border-radius:9px}
+[data-testid="stExpander"]{background:white;border:1px solid #e0e7ef;border-radius:12px}
+[data-testid="stDataFrame"]{border-radius:12px}a{color:#087e70}

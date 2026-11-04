@@ -1,0 +1,56 @@
+DRUKYUL — FREE PORTFOLIO DASHBOARD (UPDATED VERSION)
+
+NO TWELVE DATA ACCOUNT, API KEY OR PAID DATA SUBSCRIPTION REQUIRED.
+
+1. Close the old app / terminal (Ctrl+C).
+2. Extract ALL files from the updated ZIP into a NEW folder.
+3. Open Drukyul_Dynamic_Portfolio and double-click START_APP.bat.
+4. Wait for installation to finish. The launcher installs yfinance and the other
+   required packages automatically. Keep the launcher window open.
+5. Browser address: http://localhost:8501 on the same computer.
+6. Leave Price source on Free Yahoo Finance — no API key.
+7. Select stocks from the company-name/ticker dropdown.
+8. Choose a frequency and dates, enter your broker costs, then click
+   Build dynamic portfolio & compare.
+9. Scroll down for net returns, all risk metrics, the strategy comparison,
+   Markowitz calculations, covariance/correlation and the efficient frontier.
+10. Choose your comparison priority to see which strategy the historical test
+    favours. Short samples and demo results do not establish an investment choice.
+
+FREE DATA LIMITS
+Daily data: use a longer history for a meaningful long-term comparison.
+5-minute / 15-minute / hourly data: this app requires the entire request,
+including lookback, within the most recent 60 days.
+1-minute data: the entire request must be within the most recent 7 days.
+The app checks this before requesting prices; it does not fake missing history.
+Yahoo may delay prices, limit requests or be unavailable. Wait and retry if needed.
+CSV prices are an offline alternative. Demo is synthetic and labelled throughout.
+
+CSV FORMAT
+One row per stock per observed bar-close timestamp, with columns:
+  date,ticker,close,adjusted,currency
+Use the ticker shown in the dropdown (or its Yahoo symbol). Include enough
+pre-start history for the chosen lookback. Intraday times should be UTC, e.g.
+2026-10-20T14:35:00Z. Do not upload duplicate stock/time rows or missing prices.
+CSV mode currently supports same-currency portfolios and has no live quotes.
+
+LIVE PAPER PORTFOLIO
+Click Refresh prices now to see latest available prices and timestamps.
+Start / rebalance paper portfolio simulates trades (USD stocks only).
+Static shares stay frozen from the start; dynamic stocks can be replaced.
+Stale or closed-market quotes pause paper trades. Enable automatic refresh while
+keeping the dashboard open. Download your paper-session JSON before closing;
+session memory is not restored after an app restart. No brokerage orders are sent.
+
+TO RUN MANUALLY IN VS CODE
+Open the extracted folder containing app.py, then Terminal > New Terminal:
+  py -3.13 -m venv .venv
+  .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+  .\.venv\Scripts\python.exe -m streamlit run app.py
+
+Use localhost:8501, not your external IP address. Python 3.11-3.13 is recommended.
+If port 8501 is busy, close the old app first. This ZIP contains the updated files;
+the earlier ZIP download on your computer will not update automatically.
+
+Default transaction fees are illustrative. Enter your actual broker charges.
+Dynamic returns can be worse than static after fees; no strategy is guaranteed.

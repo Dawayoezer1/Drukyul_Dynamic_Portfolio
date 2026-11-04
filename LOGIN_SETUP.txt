@@ -1,0 +1,20 @@
+DRUKYUL: WEBSITE + LOGIN + DASHBOARD
+
+Double-click START_ALL.bat. It installs the requirements, then starts:
+  Website and login (Auth.py)      http://127.0.0.1:5000
+  Dashboard (app.py, Streamlit)    http://localhost:8501
+
+Use the website: create an account, log in, press "Open dashboard".
+The website gives the dashboard a sign-in link that expires after 5 minutes.
+Opening localhost:8501 directly shows "Please log in first".
+
+Manual start (two terminals, in this folder):
+  .\.venv\Scripts\python.exe Auth.py
+  .\.venv\Scripts\python.exe -m streamlit run app.py
+
+Settings (environment variables, all optional):
+  DRUKYUL_SECRET           signing key (otherwise a .auth_secret file is created)
+  DRUKYUL_SITE_URL         default http://127.0.0.1:5000
+  DRUKYUL_DASHBOARD_URL    default http://localhost:8501
+  DRUKYUL_REQUIRE_LOGIN=0  switch the dashboard login gate off
+Keep .auth_secret and drukyul.db private.

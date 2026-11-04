@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drukyul Dynamic Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Mulish:wght@400;600;700&family=Noto+Serif+Tibetan:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--crim:#7d1230;--gold:#f4c430;--ivory:#fbf3e0;--green:#2f9d62;--blue:#2f5fa8;--ink:#2a0d16;--muted:#6b4b52;
+--tile:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%237d1230'/%3E%3Cpath d='M20 4l8 8-8 8-8-8zM20 24l8 8-8 8-8-8z' fill='%23f4c430'/%3E%3Cpath d='M0 20l6-6 6 6-6 6zM28 20l6-6 6 6-6 6z' fill='%23fbf3e0'/%3E%3Ccircle cx='20' cy='12' r='2' fill='%237d1230'/%3E%3Ccircle cx='20' cy='32' r='2' fill='%237d1230'/%3E%3Cpath d='M0 0h4v4H0zM36 0h4v4h-4zM0 36h4v4H0zM36 36h4v4h-4z' fill='%232f9d62'/%3E%3Cpath d='M18 0h4v3h-4zM18 37h4v3h-4z' fill='%232f5fa8'/%3E%3C/svg%3E")}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--ivory);color:var(--ink);font:400 1.05rem/1.65 'Mulish',sans-serif}
+h1,h2,h3{font-family:'Syne',sans-serif;font-weight:800;line-height:1.05;letter-spacing:-.02em}
+.dz{font-family:'Noto Serif Tibetan',serif}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:1060px;margin:0 auto;padding:0 1.25rem}
+.weave{background:var(--tile) 0 0/40px 40px}
+.band{height:16px;border-block:3px solid var(--crim);background:repeating-linear-gradient(90deg,var(--ivory) 0 8px,var(--gold) 8px 16px,var(--green) 16px 24px,var(--blue) 24px 32px,var(--crim) 32px 48px)}
+header{position:sticky;top:0;z-index:20;background:var(--ivory)}
+nav{display:flex;align-items:center;gap:1.3rem;flex-wrap:wrap;padding:.7rem 0}
+.logo{font:800 1.25rem 'Syne',sans-serif;text-decoration:none;margin-right:auto;color:var(--crim)}
+.logo .dz{font-size:1rem;margin-left:.4rem}
+nav a.l{text-decoration:none;font-weight:700;font-size:.95rem;color:var(--ink)}
+nav a.l:hover{color:var(--crim);text-decoration:underline}
+header .weave{height:12px}
+.btn{background:var(--crim);color:var(--ivory);border:2px solid var(--gold);padding:.6rem 1.3rem;font-weight:700}
+.btn.ghost{background:var(--ivory);color:var(--crim);border-color:var(--crim)}
+#userbox{display:flex;align-items:center;gap:.7rem}
+.hero{padding:4.5rem 0}
+.plaque{max-width:780px;margin:0 auto;background:var(--ivory);border:5px solid var(--gold);box-shadow:0 0 0 9px var(--ivory),0 0 0 12px var(--crim);padding:2.6rem 2rem;text-align:center}
+.plaque .dz{font-size:1.8rem;color:var(--crim)}
+.plaque h1{font-size:clamp(2.6rem,8vw,5rem);margin:.3rem 0 .8rem}
+.lead{max-width:34rem;margin:0 auto 1.6rem;color:var(--muted)}
+.actions{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
+section{padding:4rem 0}
+section h2{font-size:clamp(1.9rem,4.5vw,2.9rem);margin-bottom:.5rem;color:var(--crim)}
+.sub{color:var(--muted);margin-bottom:1.6rem;max-width:36rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.3rem}
+.card{background:#fff;border:2px solid var(--crim);padding:0 1.3rem 1.3rem}
+.card::before{content:"";display:block;height:20px;margin:0 -1.3rem 1rem;background:var(--tile) 0 0/30px 30px}
+.card h3{font-size:1.3rem;margin-bottom:.4rem}
+.card p{color:var(--muted);font-size:.97rem}
+.opt{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;align-items:start}
+.panel{background:#fff;border:2px solid var(--crim);padding:1.2rem}
+table{width:100%;border-collapse:collapse;font-size:.93rem}
+th{text-align:left;font-size:.82rem;color:var(--muted);padding-bottom:.3rem}
+td{padding:.25rem .3rem .25rem 0}
+input[type=number],input[type=email],input[type=password],input:not([type]),textarea{font:inherit;width:100%;padding:.4rem .5rem;border:1.5px solid rgba(42,13,22,.35);background:var(--ivory);color:var(--ink);border-radius:0}
+textarea{min-height:100px;resize:vertical;padding:.65rem}
+dialog input{padding:.65rem}
+.ctl{display:grid;gap:.9rem;margin-top:1rem}
+.ctl label{display:grid;gap:.2rem;font-weight:700;font-size:.92rem}
+input[type=range]{width:100%;accent-color:var(--crim)}
+.rowb{display:flex;gap:.6rem;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:1rem;text-align:center}
+.stats b{display:block;font:800 1.6rem 'Syne',sans-serif;color:var(--crim)}
+.stats span{font-size:.82rem;color:var(--muted)}
+.alloc{display:grid;gap:.45rem;margin-bottom:1rem}
+.arow{display:grid;grid-template-columns:130px 1fr 46px;align-items:center;gap:.5rem;font-size:.9rem;font-weight:600}
+.track{height:18px;background:var(--ivory);border:1px solid var(--crim)}
+.fill{height:100%;background:var(--tile) 0 0/36px 36px;transition:width .35s}
+canvas{width:100%;height:auto;background:var(--ivory);border:1px solid var(--crim)}
+.note{color:var(--muted);font-size:.9rem}
+.gb{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.gb form{display:grid;gap:.7rem}
+.entries{display:grid;gap:.8rem;max-height:380px;overflow:auto}
+.entry{background:#fff;border-left:6px solid var(--crim);padding:.7rem 1rem}
+.entry small{color:var(--muted)}
+.err{color:#b3261e;font-weight:700;min-height:1.3em;font-size:.93rem}
+footer{text-align:center;padding:0 0 2rem;color:var(--muted)}
+footer .weave{height:40px;margin-bottom:1.2rem}
+dialog{border:5px solid var(--gold);padding:1.6rem;max-width:380px;width:92%;background:var(--ivory);color:var(--ink);margin:auto}
+dialog::backdrop{background:rgba(42,13,22,.7)}
+dialog h3{font-size:1.7rem;margin-bottom:1rem;color:var(--crim)}
+dialog form{display:grid;gap:.7rem}
+.switch{background:none;border:0;color:var(--crim);font-weight:700;text-decoration:underline;padding:0}
+@media(max-width:800px){.opt,.gb{grid-template-columns:1fr}.arow{grid-template-columns:105px 1fr 42px}}
+@media(prefers-reduced-motion:reduce){.fill{transition:none}html{scroll-behavior:auto}}
+
+details{background:#fff;border:2px solid var(--crim);margin-bottom:.8rem}
+summary{cursor:pointer;padding:.8rem 1rem;font-weight:700;color:var(--crim);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸  "}
+details[open] summary::before{content:"▾  "}
+details .in{padding:0 1.2rem 1.1rem}
+details ol,details ul{padding-left:1.3rem;display:grid;gap:.45rem}
+.scroll{overflow-x:auto}
+td,th{padding:.45rem .6rem .45rem 0;vertical-align:top;border-bottom:1px solid rgba(42,13,22,.15)}
+.notice{border-left:6px solid var(--gold);background:#fff;padding:.8rem 1rem;margin-top:1rem;font-size:.95rem}
+.dashbox{display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#fff;border:2px solid var(--crim);padding:1.1rem 1.3rem;margin-top:1.4rem}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <nav aria-label="Main">
+      <a class="logo" href="#top">Drukyul<span class="dz">འབྲུག་ཡུལ།</span></a>
+      <a class="l" href="#dashboard">Dashboard</a>
+      <a class="l" href="#guide">User guidelines</a>
+      <a class="l" href="#guestbook">Guestbook</a>
+      <div id="userbox"></div>
+    </nav>
+  </div>
+  <div class="weave" aria-hidden="true"></div>
+</header>
+
+<main id="top">
+<section class="hero weave">
+  <div class="wrap">
+    <div class="plaque">
+      <span class="dz" id="greeting">ཀུ་ཟུ་ཟང་པོ་ལ།</span>
+      <h1 id="welcome">Welcome, guest</h1>
+      <p class="lead">Build a dynamic portfolio, optimise the weights, and compare it with a static one after trading costs. Log in, open the dashboard, and follow the guidelines below.</p>
+      <div class="actions">
+        <button class="btn js-dash">Open dashboard</button>
+        <button class="btn ghost" id="heroLogin">Log in</button>
+        <a class="btn ghost" href="#guide" style="text-decoration:none">User guidelines</a>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="band" aria-hidden="true"></div>
+
+<section id="dashboard">
+  <div class="wrap">
+    <h2>The portfolio dashboard</h2>
+    <p class="sub">One workspace for stock selection, optimisation, back-testing and a live paper portfolio. It uses free Yahoo Finance data, so no API key is needed.</p>
+    <div class="cards">
+      <div class="card"><h3>1. Pick stocks</h3><p>Browse thousands of listed names by company, ticker and exchange, or search global stocks.</p></div>
+      <div class="card"><h3>2. Set the strategy</h3><p>Choose capital, rebalance frequency, lookback, risk aversion and a maximum weight per stock.</p></div>
+      <div class="card"><h3>3. Compare after costs</h3><p>See dynamic against static returns, risk and trading costs, with the Markowitz workings shown.</p></div>
+      <div class="card"><h3>4. Follow prices</h3><p>Run a forward paper portfolio with the latest available prices. No real orders are sent.</p></div>
+    </div>
+    <div class="dashbox">
+      <div><b>Your sign-in</b><br><span class="note" id="dashNote">Log in to open the dashboard.</span></div>
+      <button class="btn js-dash">Open dashboard</button>
+    </div>
+  </div>
+</section>
+<div class="band" aria-hidden="true"></div>
+
+<section id="guide">
+  <div class="wrap">
+    <h2>User guidelines: dynamic portfolio optimizer</h2>
+    <p class="sub">A step-by-step guide to using the dashboard and reading its results.</p>
+
+    <details open><summary>Quick start in 8 steps</summary><div class="in"><ol>
+      <li>Log in on this page, then press <b>Open dashboard</b>. It opens in a new tab at localhost:8501.</li>
+      <li><b>Pick your dynamic portfolio.</b> Choose stocks from the dropdown (company, ticker, exchange). Use <i>Browse more stocks</i> to refresh the US list or search and add global stocks.</li>
+      <li><b>Set the dynamic strategy.</b> Enter starting capital, base currency, rebalance frequency, lookback, risk aversion and the maximum allocation per stock.</li>
+      <li>Open <i>Backtest dates and risk settings</i> and choose the comparison start and end dates, the risk-free rate and the minimum acceptable return.</li>
+      <li><b>Enter trading costs</b> from your own broker: commission, minimum charge, sell tax, spread and slippage, and FX conversion.</li>
+      <li>Click <b>Build dynamic portfolio &amp; compare</b>.</li>
+      <li>Scroll down to read net returns, risk metrics, the dynamic versus static comparison, the Markowitz workings and the efficient frontier.</li>
+      <li>Optional: use the live section to refresh prices and run a forward paper portfolio.</li>
+    </ol></div></details>
+
+    <details><summary>What each setting does</summary><div class="in scroll"><table>
+      <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+      <tbody>
+      <tr><td><b>Rebalance frequency</b></td><td>How often weights are re-optimised, from every minute to yearly. More frequent means more trades and more cost.</td></tr>
+      <tr><td><b>Lookback</b></td><td>The number of completed return bars used to estimate returns and risk. It always ends before the trade, so no future data is used.</td></tr>
+      <tr><td><b>Risk aversion</b></td><td>Higher means more cautious. The optimizer then favours lower-risk mixes over higher expected return.</td></tr>
+      <tr><td><b>Maximum allocation per stock</b></td><td>A cap on every holding. It must be at least 100% divided by the number of stocks. With 7 stocks, use 15% or more.</td></tr>
+      <tr><td><b>Risk-free rate</b></td><td>Used in the Sharpe ratio.</td></tr>
+      <tr><td><b>Minimum acceptable return</b></td><td>Used in the Sortino ratio and downside measures.</td></tr>
+      <tr><td><b>Trading costs</b></td><td>Applied to both strategies, so the comparison is fair. Defaults are examples. Enter your real broker terms.</td></tr>
+      </tbody></table></div></details>
+
+    <details><summary>How the optimizer works</summary><div class="in"><ul>
+      <li>It maximises expected return minus a risk penalty, with weights that add up to 100%, no short selling, and your per-stock cap.</li>
+      <li>Expected returns come from the lookback window and are pulled towards the group average to reduce noise. Risk uses a shrunk covariance estimate.</li>
+      <li>A small turnover penalty discourages needless trading.</li>
+      <li><b>Static</b> buys an equal-weight portfolio once and holds it. <b>Dynamic</b> re-optimises at each rebalance. Both start with the same capital, stocks, dates and costs.</li>
+      <li>The expected return, variance, volatility and Sharpe values on screen are estimates from past data. They are not forecasts.</li>
+    </ul></div></details>
+
+    <details><summary>Reading the results</summary><div class="in"><ul>
+      <li><b>Net return</b> includes all trading costs. <b>Cost drag</b> shows how much fees reduced the result.</li>
+      <li><b>Sharpe, Sortino, Calmar and Omega</b> measure return against risk. <b>Drawdown</b> shows the largest peak-to-trough fall.</li>
+      <li><b>VaR and expected shortfall</b> are per observed interval, not annual forecasts.</li>
+      <li><b>Alpha, beta and tracking error</b> use the static portfolio as the reference.</li>
+      <li>Choose a comparison priority: Sharpe (balance), net return (growth) or volatility (lower risk). The dashboard then reports which strategy the history favoured.</li>
+      <li>Histories under 180 calendar days or 60 observations are labelled as too short for an investment choice. Demo results never support one.</li>
+    </ul></div></details>
+
+    <details><summary>Data sources and limits</summary><div class="in"><ul>
+      <li>The default source is free Yahoo Finance. It may be delayed, rate-limited or unavailable. Wait and try again.</li>
+      <li>Daily data can cover long histories. Hourly, 15-minute and 5-minute data must fall within the last 60 days. One-minute data must fall within the last 7 days, including the lookback.</li>
+      <li>CSV upload is an offline option. Use columns <b>date, ticker, close, adjusted, currency</b>, one row per stock per timestamp, in a single currency.</li>
+      <li>The demo option uses synthetic prices and is labelled as such. Missing real data is never replaced with fake data.</li>
+    </ul></div></details>
+
+    <details><summary>Live paper portfolio</summary><div class="in"><ul>
+      <li>Click <b>Refresh prices now</b> to see the latest available prices and their timestamps.</li>
+      <li>Click <b>Start / rebalance paper portfolio</b> to simulate trades. Only USD stocks are supported.</li>
+      <li>Static shares stay fixed from the start. Dynamic holdings can be replaced at each rebalance.</li>
+      <li>Stale or closed-market quotes pause paper trades.</li>
+      <li>Download the paper-session JSON before closing. Sessions are not restored after a restart.</li>
+    </ul></div></details>
+
+    <details><summary>Logging in, privacy and troubleshooting</summary><div class="in"><ul>
+      <li>Your account lives in a local database managed by <b>Auth.py</b>. Passwords are stored hashed.</li>
+      <li>The dashboard opens through a short-lived sign-in link that expires after 5 minutes. If it expires, press <b>Open dashboard</b> again.</li>
+      <li>"Cannot reach Auth.py": start the site with <b>START_ALL.bat</b> or <code>python Auth.py</code>.</li>
+      <li>Dashboard tab will not load: start it with <code>python -m streamlit run app.py</code> and use localhost:8501.</li>
+    </ul></div></details>
+
+    <div class="notice">This tool is for education and research. Results come from historical data, fees are estimates, and no strategy is guaranteed. It is not financial advice, and no brokerage orders are sent.</div>
+  </div>
+</section>
+<div class="band" aria-hidden="true"></div>
+
+<section id="guestbook">
+  <div class="wrap">
+    <h2>Investor guestbook <span class="dz" style="font-size:1.4rem">བཀྲ་ཤིས་བདེ་ལེགས།</span></h2>
+    <p class="sub">Log in to leave a note. Entries are saved by Auth.py.</p>
+    <div class="gb">
+      <div id="gbForm"></div>
+      <div class="entries" id="entries" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="weave" aria-hidden="true"></div>
+  <p>Made in Bhutan. Tashi Delek.</p>
+</footer>
+
+<dialog id="authDlg" aria-labelledby="authTitle">
+  <h3 id="authTitle">Log in</h3>
+  <form id="authForm">
+    <input id="fName" placeholder="Your name" autocomplete="name" hidden>
+    <input id="fEmail" type="email" placeholder="Email" autocomplete="email" required>
+    <input id="fPass" type="password" placeholder="Password (6+ characters)" autocomplete="current-password" required>
+    <div class="err" id="authErr" role="alert"></div>
+    <button class="btn" id="authSubmit">Log in</button>
+    <p class="note"><span id="switchText">New here?</span> <button type="button" class="switch" id="switchBtn">Create an account</button></p>
+    <button type="button" class="switch" id="closeBtn" style="justify-self:start;color:var(--muted)">Close</button>
+  </form>
+</dialog>
+
+<script>
+const $ = id => document.getElementById(id);
+
+/* ---------- Dashboard link ---------- */
+async function openDashboard() {
+  if (!user) { openAuth(); return; }
+  const tab = window.open("about:blank", "_blank");
+  try {
+    const { url } = await api("/api/dashboard-link");
+    if (tab) tab.location.href = url; else location.href = url;
+  } catch (err) {
+    if (tab) tab.close();
+    $("dashNote").textContent = err.message === "Failed to fetch" ? "Cannot reach Auth.py. Start it with START_ALL.bat." : err.message;
+  }
+}
+document.addEventListener("click", e => { if (e.target.closest(".js-dash")) openDashboard(); });
+
+/* ---------- Auth and welcome message ---------- */
+/* ---------- Auth and welcome message ---------- */
+/* ---------- Auth (talks to Auth.py) ---------- */
+let mode = "login", token = null, user = null;
+try { token = localStorage.getItem("drukyul_token"); } catch (e) {}
+
+async function api(path, method = "GET", body) {
+  const res = await fetch(path, {
+    method, headers: { "Content-Type": "application/json", ...(token ? { Authorization: "Bearer " + token } : {}) },
+    body: body ? JSON.stringify(body) : undefined
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || "Something went wrong.");
+  return data;
+}
+const esc = s => s.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+function renderUser() {
+  $("userbox").innerHTML = user
+    ? `<span>Tashi Delek, <b>${esc(user.name.split(" ")[0])}</b></span><button class="btn ghost" id="logoutBtn">Log out</button>`
+    : `<button class="btn" id="loginBtn">Log in</button>`;
+  $("greeting").textContent = user ? "བཀྲ་ཤིས་བདེ་ལེགས།" : "ཀུ་ཟུ་ཟང་པོ་ལ།";
+  $("welcome").textContent = "Welcome, " + (user ? user.name.split(" ")[0] : "guest");
+  $("heroLogin").hidden = !!user;
+  $("dashNote").textContent = user ? "Signed in as " + user.name + ". The dashboard opens in a new tab." : "Log in to open the dashboard.";
+  renderGB();
+}
+function setMode(m) {
+  mode = m;
+  const reg = m === "register";
+  $("authTitle").textContent = reg ? "Create account" : "Log in";
+  $("authSubmit").textContent = reg ? "Create account" : "Log in";
+  $("fName").hidden = !reg; $("fName").required = reg;
+  $("fPass").autocomplete = reg ? "new-password" : "current-password";
+  $("switchText").textContent = reg ? "Already registered?" : "New here?";
+  $("switchBtn").textContent = reg ? "Log in" : "Create an account";
+  $("authErr").textContent = "";
+}
+function openAuth(m = "login") { setMode(m); $("authDlg").showModal(); }
+
+document.addEventListener("click", e => {
+  if (e.target.id === "loginBtn" || e.target.id === "heroLogin") openAuth();
+  if (e.target.id === "gbLogin") openAuth("register");
+  if (e.target.id === "logoutBtn") { token = user = null; try { localStorage.removeItem("drukyul_token"); } catch (x) {} renderUser(); }
+});
+$("switchBtn").onclick = () => setMode(mode === "login" ? "register" : "login");
+$("closeBtn").onclick = () => $("authDlg").close();
+
+$("authForm").onsubmit = async e => {
+  e.preventDefault();
+  $("authErr").textContent = "";
+  try {
+    const body = { email: $("fEmail").value, password: $("fPass").value };
+    if (mode === "register") body.name = $("fName").value;
+    const data = await api("/api/" + mode, "POST", body);
+    token = data.token; user = data.user;
+    try { localStorage.setItem("drukyul_token", token); } catch (x) {}
+    $("authForm").reset(); $("authDlg").close(); renderUser();
+  } catch (err) {
+    $("authErr").textContent = err.message === "Failed to fetch"
+      ? "Cannot reach Auth.py. Run it with: python Auth.py" : err.message;
+  }
+};
+
+/* ---------- Guestbook ---------- */
+async function renderGB() {
+  $("gbForm").innerHTML = user
+    ? `<form id="gbSend"><textarea id="gbMsg" maxlength="280" placeholder="Leave a kind word..." aria-label="Guestbook message" required></textarea><div class="err" id="gbErr" role="alert"></div><button class="btn">Sign guestbook</button></form>`
+    : `<p class="note">You need an account to sign the guestbook.</p><br><button class="btn" id="gbLogin">Create an account</button>`;
+  try {
+    const { entries } = await api("/api/guestbook");
+    $("entries").innerHTML = entries.length
+      ? entries.map(x => `<div class="entry"><b>${esc(x.name)}</b><br>${esc(x.message)}<br><small>${esc(x.created_at)}</small></div>`).join("")
+      : `<p class="note">No messages yet. Be the first to sign.</p>`;
+  } catch (e) {
+    $("entries").innerHTML = `<p class="note">Guestbook is offline. Start Auth.py to load messages.</p>`;
+  }
+}
+document.addEventListener("submit", async e => {
+  if (e.target.id !== "gbSend") return;
+  e.preventDefault();
+  try { await api("/api/guestbook", "POST", { message: $("gbMsg").value }); renderGB(); }
+  catch (err) { $("gbErr").textContent = err.message; }
+});
+
+/* ---------- Start ---------- */
+(async () => {
+  if (token) { try { user = (await api("/api/me")).user; } catch (e) { token = null; } }
+  renderUser();
+})();
+</script>
+</body>
+</html>
